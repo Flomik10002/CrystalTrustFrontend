@@ -1,0 +1,78 @@
+<div class="min-h-screen bg-background-level1 text-text">
+  <app-header></app-header>
+  <div class=" h-[30px]"></div>
+
+
+  <div class=" bg-background text-text blur-lg">
+    <div class="bg-background-level1 rounded-b-40">
+      <div class="flex items-center pt-space-30 pb-space-20 px-4">
+        <div class="h-10 w-10 border-2 border-primary rounded-full overflow-hidden">
+          <img
+            src="https://mc-heads.net/avatar/_Flomik_"
+            alt="avatar"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div class="ml-2">
+          <h2 class="text-b font-bold">_Flomik_</h2>
+        </div>
+      </div>
+
+      <div class="flex gap-3 pb-space-20 pt-space-10 pl-space-20 pr-space-20 overflow-x-auto">
+        <app-story-card color="bg-purple-500"></app-story-card>
+        <app-story-card color="bg-slate-600"></app-story-card>
+        <app-story-card color="bg-amber-200"></app-story-card>
+        <app-story-card color="bg-slate-400"></app-story-card>
+      </div>
+
+      <div class="text-center text-text-second text-sm pb-space-10">
+        Лента событий
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-background-level1 rounded-t-40">
+    <div class="mb-6">
+      <div class="relative mb-6">
+        <img
+          src="assets/business/banner.png"
+          alt="Crystal Business Cards"
+          class="w-full h-auto rounded-2xl"/>
+      </div>
+    </div>
+    <div class="px-6 mb-6">
+      <div class="inline-block bg-primary/15 text-primary text-sm font-medium px-3 py-1 rounded-full">
+        Бизнес-счёт
+      </div>
+    </div>
+
+    <div class="text-left px-6 mb-2">
+      <h2 class="text-x font-mb text-white">Статус заявки</h2>
+    </div>
+
+    <div class="px-6 mb-6">
+      <h2 class="text-text-second text-base leading-relaxed">
+        Заявка на бизнес-счет была успешно обработана
+      </h2>
+    </div>
+
+    <div class="bg-background-level2 mb-6 h-1 rounded-2xl mx-6"></div>
+
+    <!-- Текст -->
+    <div class="px-6 mb-6">
+      <p class="text-white/90 text-base leading-relaxed">
+        Вы успешно зарегистрировали свой бизнес-счёт.
+        Теперь вы можете принимать платежи и управлять финансами
+      </p>
+    </div>
+
+    <!-- Кнопка -->
+    <div class="px-6  pb-9">
+      <button
+        [routerLink]="['/']"
+        class="w-full bg-primary hover:bg-[#A58BBE] text-white rounded-2xl h-16 text-xl font-medium border-none transition-all">
+        На главную
+      </button>
+    </div>
+  </div>
+</div>

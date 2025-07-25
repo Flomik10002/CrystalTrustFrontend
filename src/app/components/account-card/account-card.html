@@ -1,0 +1,21 @@
+<div class="mx-6 mt-6">
+  <div class="bg-background-level1 rounded-[25px] p-6">
+    <div class="flex">
+      <div class="flex flex-col flex-shrink-0">
+        <img [src]="getIconPath(type)" class="h-12 w-12 object-contain" />
+        <div class="text-white text-xs font-bold mt-7 text-center">
+          {{ displayNumber }}
+        </div>
+      </div>
+
+      <div class="flex flex-col justify-center flex-1 pb-12 -ml-5">
+        <div class="text-white text-2xl font-bold leading-none">
+          {{ balance }} АР
+        </div>
+        <div class="text-white text-sm leading-none mt-1">
+          {{ title }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

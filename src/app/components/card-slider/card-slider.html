@@ -1,0 +1,29 @@
+  <div class="overflow-x-auto scroll-smooth snap-x snap-mandatory mx-6 mb-4" (scroll)="onScroll($event)">
+    <div class="flex gap-4 w-fit">
+      <div
+        *ngFor="let card of cards; index as i"
+        class="snap-center shrink-0 w-[calc(100vw-48px)] border-none rounded-[25px] p-6"
+        [style.scrollSnapAlign]="'center'"
+        [ngClass]="card.bgClass"
+      >
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <img [src]="getIconPath(card.type)" class="h-16 w-16 mr-4" alt="icon"/>
+            <div>
+              <div class="text-white text-2xl font-bold">{{ card.balance }} АР</div>
+              <div class="text-sm text-white">{{ card.label }}</div>
+            </div>
+          </div>
+          <div class="text-white text-sm pb-10">{{ card.number }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="flex justify-center gap-2 mb-6">
+  <div
+    *ngFor="let card of cards; index as i"
+    class="w-2 h-2 rounded-full transition-colors"
+    [ngClass]="i === selectedCardIndex ? 'bg-primary' : 'bg-background-level2'"
+  ></div>
+</div>

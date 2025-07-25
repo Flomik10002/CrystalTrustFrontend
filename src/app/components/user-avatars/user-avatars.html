@@ -1,0 +1,9 @@
+<div class="flex gap-3 flex-wrap pb-1">
+  <div *ngFor="let u of users" class="flex flex-col items-center w-[72px]">
+    <button (click)="click(u.name)"
+            class="h-14 w-14 rounded-full overflow-hidden mb-1 border-2 border-primary">
+      <img [src]="u.avatar" [alt]="u.name" class="h-full w-full object-cover">
+    </button>
+    <span class="text-white text-[12px] text-center truncate w-full">{{ u.name }}</span>
+  </div>
+</div>

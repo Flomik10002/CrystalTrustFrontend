@@ -1,0 +1,86 @@
+<!-- transfer.component.html -->
+<div class="min-h-screen bg-background text-text">
+  <app-header></app-header>
+  <div class="h-[60px]"></div>
+
+  <!-- Header -->
+  <div class="relative bg-background pb-6">
+    <div class="flex items-center justify-between px-6 pb-6">
+      <a [routerLink]="['/']" class="text-primary text-lg font-normal">Закрыть</a>
+      <h1 class="text-xl font-bold text-white text-center flex-1">Открытие бизнес-
+        счета</h1>
+      <div class="w-16"></div>
+    </div>
+  </div>
+
+  <div class="mx-6 mb-6">
+    <div class="bg-background-level2 rounded-xl p-4">
+      <input [(ngModel)]="businessTitle" type="text" placeholder="Введите название бизнеса"
+             class="w-full bg-transparent text-white text-lg placeholder-text-second border-none outline-none" />
+    </div>
+    <div class="">
+      <div
+        *ngIf="businessTitle.length > 0 && isTitleInvalid"
+        class="text-sm text-secondary-danger mt-1"
+      >
+        Название должно содержать минимум 3 символа.
+      </div>
+    </div>
+  </div>
+
+  <div class="mx-6 mb-6">
+    <div class="bg-background-level2 rounded-xl p-4">
+      <input [(ngModel)]="businessTag" type="text" placeholder="Введите тег для бизнеса"
+             class="w-full bg-transparent text-white text-lg placeholder-text-second border-none outline-none" />
+    </div>
+    <div
+      *ngIf="businessTag.length > 0 && isTagInvalid"
+      class="text-sm text-secondary-danger mt-1"
+    >
+      Некорректный тег. Только латиница, цифры, тире или подчёркивания (от 3 до 20 символов).
+    </div>
+  </div>
+
+  <div class="text-text-second text-sm mb-6 mx-6">
+    Тег для бизнеса - уникальный идентификатор.<br>
+    Вы не сможете изменить тег после создания.
+  </div>
+
+  <div class="mx-6 mb-6">
+    <div class="bg-background-level2 rounded-xl py-4 px-2">
+      <div class="text-xl font-b text-white text-center flex-1 mb-4 ">Выберите категорию<br>бизнеса</div>
+      <div *ngFor="let category of categories"
+           (click)="select(category)"
+           class="flex items-center justify-between px-2 py-2 rounded-xl cursor-pointer transition-all duration-150"
+           [ngClass]="selected === category
+          ? 'bg-primary/20 text-white'
+          : 'hover:bg-white/5 text-white'">
+
+        <span class="text-sm">{{ category }}</span>
+
+        <div class="w-5 h-5 rounded-full border border-white/40 flex items-center justify-center">
+          <div *ngIf="selected === category" class="w-3 h-3 bg-primary rounded-full"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mx-6 mb-6">
+    <button (click)="sumbitRegister()"
+            [disabled]="loading || isTitleInvalid || isTagInvalid || isCategoryInvalid"
+            class="w-full bg-primary hover:bg-[#A58BBE] text-white rounded-2xl h-16 text-xl font-normal border-none disabled:opacity-50 disabled:cursor-not-allowed">
+      {{ loading ? 'Отправка...' : 'Подать заявку' }}
+    </button>
+  </div>
+</div>
+
+<div *ngIf="modalVisible" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+  <div class="bg-background-level2 p-6 rounded-2xl text-white w-[80%] max-w-md shadow-lg">
+    <h2 class="text-lg font-bold mb-4">Ошибка</h2>
+    <p class="text-sm mb-6 text-text-second">{{ modalMessage }}</p>
+    <button (click)="modalVisible = false"
+            class="w-full bg-primary hover:bg-[#A58BBE] text-white rounded-xl h-12 text-base">
+      Понял
+    </button>
+  </div>
+</div>

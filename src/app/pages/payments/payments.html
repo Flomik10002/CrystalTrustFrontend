@@ -1,0 +1,152 @@
+<div class="min-h-screen bg-background text-text">
+  <app-header></app-header>
+
+  <div class="h-[60px]"></div>
+
+  <div class="px-6 pb-6">
+    <h1 class="text-3xl font-extrabold text-white">Платежи</h1>
+  </div>
+
+  <div class="mx-6 mb-6">
+    <div class="bg-background-level1 border-none rounded-[25px] p-3">
+
+      <h2 class="text-white text-[20px] font-bold mb-2 mt-1 pl-1">
+        Перевод по никнейму
+      </h2>
+      <div class="w-full">
+        <button [routerLink]="['/transfer/by-username']" class="w-full">
+          <div class="bg-background-level2 rounded-xl p-3 mb-4 w-full">
+            <div
+              class="w-full bg-transparent text-text-second text-sm  border-none outline-none text-left"
+            >
+              Введите никнейм
+            </div>
+          </div>
+        </button>
+      </div>
+
+
+      <div class="flex justify-center gap-2 flex-wrap">
+        <div *ngIf="loading()" class="text-white">Загрузка…</div>
+
+        <app-user-avatars
+          *ngIf="!loading()"
+          [users]="recipients()"
+          (avatarClick)="quickTransfer($event)">
+        </app-user-avatars>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="mx-6 mb-6">
+    <div class="bg-background-level1 border-none rounded-[25px] p-3">
+      <h2 class="text-white text-[20px] font-bold mb-2 mt-1 pl-1">Переводы</h2>
+      <div class="flex gap-3 flex-wrap">
+        <button [routerLink]="['/transfer/between-accounts']"
+
+          class="w-[88px] h-[5.5rem] rounded-[20px] bg-background-level2 hover:bg-background-level3 text-white flex flex-col items-start justify-center px-2">
+
+          <svg class="h-8 w-8 mb-1 text-primary" fill="none" viewBox="0 0 102 102">
+            <path
+              d="M36.9377 6L6.00018 39.75H62.2502M96.0002 39.75H81.9377M65.0627 96L96.0002 62.25H39.7502M6.00018 62.25H20.0627"
+              stroke="#9F7AEA" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
+          <div class="text-sm  text-[12px] leading-tight text-left">
+            Между<br/>счетами
+          </div>
+        </button>
+        <button [routerLink]="['/transfer/by-account']"
+          class="w-[88px] h-[5.5rem] rounded-[20px] bg-background-level2 hover:bg-background-level3 text-white flex flex-col items-start justify-center px-2">
+
+          <svg class="h-8 w-9.6 mb-1 text-primary" fill="none" viewBox="0 0 122 100">
+            <path
+              d="M49.8001 75.4034H27.4001M38.6001 58.4679H27.4001M117 50.0002C117 28.7109 117 18.0663 110.439 11.4526C103.879 4.83887 93.3188 4.83887 72.2001 4.83887H49.8001C28.6812 4.83887 18.1218 4.83887 11.5609 11.4526C5.00012 18.0663 5.00012 28.7109 5.00012 50.0002C5.00012 71.2892 5.00012 81.9343 11.5609 88.5476C18.1218 95.1614 28.6812 95.1614 49.8001 95.1614H72.2001C93.3188 95.1614 103.879 95.1614 110.439 88.5476C114.097 84.8601 115.715 79.9201 116.432 72.5808M5.00012 38.7098H33.0001M117 38.7098H55.4001M72.2001 66.9356C72.2001 61.6134 72.2001 58.9523 73.8404 57.2988C75.4806 55.6453 78.1204 55.6453 83.4001 55.6453C88.6798 55.6453 91.3196 55.6453 92.9599 57.2988C94.6001 58.9523 94.6001 61.6134 94.6001 66.9356C94.6001 72.2579 94.6001 74.919 92.9599 76.5725C91.3196 78.226 88.6798 78.226 83.4001 78.226C78.1204 78.226 75.4806 78.226 73.8404 76.5725C72.2001 74.919 72.2001 72.2579 72.2001 66.9356Z"
+              stroke="#9F7AEA" stroke-width="9" stroke-linecap="round"/>
+          </svg>
+
+          <div class="text-sm text-[12px] leading-tight text-left whitespace-nowrap break-words">
+            По номеру<br/>счета
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+<!--  <div class="mx-6 mb-6">-->
+<!--    <div class="bg-background-level1 border-none rounded-[25px] p-3">-->
+<!--      <h2 class="text-white text-[20px] font-bold mb-2 mt-1 pl-1">Действия</h2>-->
+<!--      <div class="flex gap-3 flex-wrap">-->
+<!--        <button [routerLink]="['/request/deposit']"-->
+<!--          class="w-[88px] h-[5.5rem] rounded-[20px] bg-background-level2 hover:bg-background-level3 text-white flex flex-col items-start justify-center px-2">-->
+
+<!--          <svg class="h-8 w-8 mb-1 text-primary" fill="none" viewBox="0 0 95 95">-->
+<!--            <path-->
+<!--              d="M42.7778 66.3889L61.6667 47.5M61.6667 47.5L42.7778 28.6111M61.6667 47.5H5M12.1568 71.1111C19.7809 82.5011 32.7647 90 47.5 90C70.9723 90 90 70.9723 90 47.5C90 24.0279 70.9723 5 47.5 5C32.7647 5 19.7809 12.499 12.1568 23.8889"-->
+<!--              stroke="#9F7AEA" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>-->
+<!--          </svg>-->
+
+<!--          <div class="text-sm  text-[12px] leading-tight text-left">-->
+<!--            Внести<br/>наличные-->
+<!--          </div>-->
+<!--        </button>-->
+<!--        <button [routerLink]="['/request/withdraw']"-->
+<!--          class="w-[88px] h-[5.5rem] rounded-[20px] bg-background-level2 hover:bg-background-level3 text-white flex flex-col items-start justify-center px-2">-->
+
+<!--          <svg class="h-8 w-9.6 mb-1 text-primary" fill="none" viewBox="0 0 122 100">-->
+<!--            <path-->
+<!--              d="M53 68.833V4.83301M53 68.833L37 52.833M53 68.833L69 52.833M26.3333 31.4997H22.0667C16.0928 31.4997 13.1058 31.4997 10.8241 32.6623C8.81701 33.6849 7.18523 35.3167 6.16261 37.3237C5 39.6053 5 42.5925 5 48.5663V73.0997C5 79.0735 5 82.0607 6.16261 84.3423C7.18523 86.3493 8.81701 87.9813 10.8241 89.0037C13.1058 90.1663 16.0928 90.1663 22.0667 90.1663H83.9333C89.9072 90.1663 92.8944 90.1663 95.176 89.0037C97.1829 87.9813 98.8149 86.3493 99.8373 84.3423C101 82.0607 101 79.0735 101 73.0997V48.5663C101 42.5925 101 39.6053 99.8373 37.3237C98.8149 35.3167 97.1829 33.6849 95.176 32.6623C92.8944 31.4997 89.9072 31.4997 83.9333 31.4997H79.6667"-->
+<!--              stroke="#9F7AEA" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>-->
+<!--          </svg>-->
+
+<!--          <div class="text-sm text-[12px] leading-tight text-left break-words">-->
+<!--            Снять<br/>наличные-->
+<!--          </div>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+  <div class="fixed -bottom-1  left-0 right-0 bg-background-level2/40 backdrop-blur-xl z-50">
+    <div class="flex justify-around items-center py-3">
+
+      <!-- Главная -->
+      <a
+        [routerLink]="'/'"
+        routerLinkActive="text-primary fill-primary"
+        class="flex flex-col items-center gap-1 text-text-second">
+        <svg class="h-6 w-6 transition-colors" fill="none" viewBox="0 0 79 84">
+          <path d="M24.2857 80H14.1429C8.54111 80 4 75.6041 4 70.1811V35.4219C4 32.5553 5.29387 29.8321 7.54199 27.9667L32.899 6.92632C36.6975 3.77456 42.3025 3.77456 46.101 6.92632L71.4581 27.9667C73.7063 29.8321 75 32.5553 75 35.4219V70.1811C75 75.6041 70.459 80 64.8571 80H54.7143M24.2857 80V50.5434C24.2857 47.832 26.5563 45.634 29.3571 45.634H49.6429C52.4438 45.634 54.7143 47.832 54.7143 50.5434V80M24.2857 80H54.7143" stroke="#656565" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="text-xs transition-colors ">Главная</span>
+      </a>
+
+      <!-- Платежи -->
+      <a
+        class="flex flex-col items-center gap-1 text-primary">
+        <svg class="h-6 w-6 transition-colors" fill="currentColor" viewBox="0 0 80 80">
+          <path d="M39.979 0C59.8876 0 77.0108 14.1228 79.6919 34.9355C81.256 47.0794 76.7715 59.8008 68.0639 68.3984C60.7321 75.6376 50.5356 79.9007 40.2368 80C40.0653 80.0005 39.8936 80.0005 39.7221 80C24.5671 79.854 10.1076 70.4498 3.70554 56.8389C-1.23949 46.3253 -1.23086 33.6558 3.70554 23.1611C10.1533 9.45326 24.8543 0.000103759 39.979 0ZM52.4057 11.6426C41.0892 6.90818 27.4784 9.70667 18.8178 18.0586C11.4013 25.211 7.84096 36.1106 9.72702 46.1826C12.4022 60.4683 25.8578 71.6111 40.2798 71.75C40.4136 71.7505 40.5473 71.7505 40.6811 71.75C48.9978 71.6698 57.0621 68.1572 62.812 62.2764C69.3676 55.5712 72.7033 45.8373 71.5063 36.5498C70.1097 25.7139 62.5319 15.8792 52.4057 11.6426ZM40.4995 16C53.4782 16 63.9995 26.5213 63.9995 39.5C63.9995 52.4787 53.4782 63 40.4995 63C27.5209 62.9999 16.9995 52.4786 16.9995 39.5C16.9995 26.5214 27.5209 16.0001 40.4995 16Z" fill="#9F7AEA"/>
+        </svg>
+        <span class="text-xs ">Платежи</span>
+      </a>
+
+      <!-- Прочее -->
+      <a
+        [routerLink]="'/settings'"
+        routerLinkActive="text-primary fill-primary"
+        class="flex flex-col items-center gap-1 text-text-second">
+        <svg class="h-6 w-6 transition-colors" fill="currentColor" viewBox="0 0 85 85">
+          <path d="M1.85056 46.9705C-0.617057 44.5026 -0.616824 40.5015 1.85108 38.0339L14.363 25.5235C16.8309 23.0558 20.8319 23.0561 23.2996 25.524L35.81 38.0359C38.2776 40.5038 38.2774 44.5048 35.8095 46.9725L23.2976 59.4829C20.8297 61.9505 16.8286 61.9503 14.361 59.4824L1.85056 46.9705Z" fill="#656565"/>
+          <path d="M25.5172 70.637C23.0496 68.1691 23.0498 64.168 25.5177 61.7004L38.0296 49.19C40.4975 46.7224 44.4986 46.7226 46.9662 49.1905L59.4767 61.7024C61.9443 64.1703 61.944 68.1714 59.4761 70.639L46.9642 83.1494C44.4963 85.617 40.4953 85.6168 38.0277 83.1489L25.5172 70.637Z" fill="#656565"/>
+          <path d="M25.5109 23.2976C23.0433 20.8297 23.0435 16.8286 25.5114 14.361L38.0233 1.85056C40.4913 -0.617057 44.4923 -0.616824 46.9599 1.85108L59.4704 14.363C61.938 16.8309 61.9377 20.8319 59.4698 23.2996L46.9579 35.81C44.49 38.2776 40.489 38.2774 38.0214 35.8095L25.5109 23.2976Z" fill="#656565"/>
+          <path d="M49.1837 46.9705C46.7161 44.5026 46.7163 40.5015 49.1842 38.0339L61.6962 25.5235C64.1641 23.0558 68.1651 23.0561 70.6327 25.524L83.1432 38.0359C85.6108 40.5038 85.6106 44.5048 83.1427 46.9725L70.6307 59.4829C68.1628 61.9505 64.1618 61.9503 61.6942 59.4824L49.1837 46.9705Z" fill="#656565"/>
+        </svg>
+        <span class="text-xs ">Прочее</span>
+      </a>
+
+    </div>
+  </div>
+
+</div>
