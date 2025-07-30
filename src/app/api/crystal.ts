@@ -29,27 +29,34 @@ export interface SummaryEntry {
 }
 
 export interface TransactionEntry {
-  id: string;                    // Уникальный идентификатор транзакции
-  name: string;                  // Название (обычно имя контрагента)
-  amount: number;               // Сумма перевода
-  type: string;                 // Тип (перевод, покупка, зарплата и т.п.)
-  category: string;             // Категория (например, "еда", "казино", "транспорт")
-  from: string;                 // От кого пришло
-  from_account: string;         // id счета От кого пришло
-  to: string;                   // Кому ушло
-  to_account: string;           // id счета Кому ушло
-  avatar: string;              // Аватарка контрагента
-  timestamp: string;           // Дата в ISO-формате (для сортировки)
+  id: string;
+  name: string;
+  amount: number;
+  type: string;
+  category: string;
+  from: string;
+  from_account: string;
+  to: string;
+  to_account: string;
+  avatar: string;
+  timestamp: string;
 }
 
 export interface TransactionDay {
-  date: string;                 // Формат: "10 июля"
-  dailyTotal: string;          // Общая сумма за день
+  date: string;
+  dailyTotal: string;
   items: TransactionEntry[];
 }
 
-export interface RecipientDto { nickname: string; avatar: string }
-export interface Recipient    { name: string;     avatar: string }
+export interface RecipientDto {
+  nickname: string;
+  avatar: string
+}
+
+export interface Recipient {
+  name: string;
+  avatar: string
+}
 
 export interface TransferPayload {
   recipient_type: 'nickname' | 'account';

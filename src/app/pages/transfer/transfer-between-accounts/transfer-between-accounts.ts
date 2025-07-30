@@ -39,7 +39,6 @@ export class TransferBetweenAccounts implements OnInit, OnDestroy {
   toCardIndex   = 0;
   customAmount  = '';
 
-  /* --- view-model для слайдера ---------------------------------------- */
   readonly sliderCards = computed<Card[]>(() =>
     this.accounts().map(acc => ({
       id:       acc.id,
@@ -57,13 +56,11 @@ export class TransferBetweenAccounts implements OnInit, OnDestroy {
     this.fromCardIndex !== this.toCardIndex
   );
 
-  /* --- ctor ------------------------------------------------------------ */
   constructor(
     private readonly api: Crystal,
     private readonly router: Router,
   ) {}
 
-  /* --- lifecycle ------------------------------------------------------- */
   ngOnInit() {
     this.api.getAccounts()
       .pipe(
@@ -71,7 +68,7 @@ export class TransferBetweenAccounts implements OnInit, OnDestroy {
           const sorted = (res.accounts ?? [])
             .sort((a, b) => (a.type === 'personal' ? -1 : 1) - (b.type === 'personal' ? -1 : 1));
 
-          this.accounts.set(sorted);   // ❗ теперь индексы UI == индексы данных
+          this.accounts.set(sorted);
         }),
         takeUntilDestroyed(this.destroyRef),
       )
@@ -80,12 +77,10 @@ export class TransferBetweenAccounts implements OnInit, OnDestroy {
 
   ngOnDestroy() {}
 
-  /* --- helpers --------------------------------------------------------- */
   private get fromAccount() { return this.accounts()[this.fromCardIndex]!; }
   private get toAccount()   { return this.accounts()[this.toCardIndex]!;   }
   clearError()              { this.error.set(''); }
 
-  /* --- submit ---------------------------------------------------------- */
   async submitTransfer() {
     if (!this.canSubmit()) return;
     this.pending.set(true);
