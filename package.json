@@ -26,6 +26,7 @@
     "@angular/forms": "^20.1.0",
     "@angular/platform-browser": "^20.1.0",
     "@angular/router": "^20.1.0",
+    "@zakarliuka/ng-telegram-webapp": "^1.0.6",
     "rxjs": "~7.8.0",
     "swiper": "^11.2.10",
     "tailwind-scrollbar-hide": "^4.0.0",

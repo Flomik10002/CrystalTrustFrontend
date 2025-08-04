@@ -1,3 +1,5 @@
+import {environment} from './environment.prod';
+
 export const config = {
-  apiUrl: 'https://api.tonalyze.ru'
+  apiUrl: environment.apiUrl
 };

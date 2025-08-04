@@ -1,5 +1,12 @@
-FROM nginx:1.26-alpine
+# Stage 1: Angular build
+FROM node:20-alpine as build
+WORKDIR /app
+COPY . .
+RUN npm install && chmod +x ./node_modules/.bin/ng && npx ng build --configuration production
 
-COPY dist/web /usr/share/nginx/html
-COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf
-COPY ../certs /etc/nginx/certs
+# Stage 2: NGINX
+FROM nginx:alpine
+COPY --from=build /app/dist/web/browser /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY certs/fullchain.pem /etc/nginx/certs/
+COPY certs/privkey.pem   /etc/nginx/certs/

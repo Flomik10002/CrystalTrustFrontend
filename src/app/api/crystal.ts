@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {forkJoin, Observable} from 'rxjs';
 import {config} from '../../config';
+import {TelegramService} from '../telegram.service';
 
 export interface ProfileDto {
   nickname: string;
@@ -70,31 +71,45 @@ export interface TransferPayload {
 export class Crystal {
   private base = `${config.apiUrl}`;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private telegram: TelegramService
+  ) {}
+
+  private getHeaders() {
+    return {
+      headers: {
+        'X-Telegram-InitData': this.telegram.initData,
+      }
+    };
+  }
 
   createBusiness(body: { name: string; tag: string; category: string }): Observable<any> {
-    return this.http.post(`${this.base}/business/create-business`, body,);
+    return this.http.post(`${this.base}/business/create-business`, body, this.getHeaders());
   }
 
   getProfile(): Observable<ProfileDto> {
-    return this.http.get<ProfileDto>(`${this.base}/me/profile`,);
+    return this.http.get<ProfileDto>(`${this.base}/me/profile`, this.getHeaders());
   }
 
   getAccounts(): Observable<{ accounts: AccountDto[] }> {
-    return this.http.get<{ accounts: AccountDto[] }>(`${this.base}/me/accounts`,);
+    return this.http.get<{ accounts: AccountDto[] }>(`${this.base}/me/accounts`, this.getHeaders());
   }
 
   getSummary(): Observable<SummaryDto> {
-    return this.http.get<SummaryDto>(`${this.base}/me/summary`,);
+    return this.http.get<SummaryDto>(`${this.base}/me/summary`, this.getHeaders());
   }
 
   getTransactions(): Observable<TransactionDay[]> {
-    return this.http.get<TransactionDay[]>(`${this.base}/me/transactions`);
+    return this.http.get<TransactionDay[]>(`${this.base}/me/transactions`, this.getHeaders());
   }
 
   getRecipients(): Observable<RecipientDto[]> {
-    return this.http.get<RecipientDto[]>(
-      `${this.base}/me/recent-recipients`);
+    return this.http.get<RecipientDto[]>(`${this.base}/me/recent-recipients`, this.getHeaders());
+  }
+
+  transfer(payload: TransferPayload) {
+    return this.http.post(`${this.base}/me/transfer`, payload, this.getHeaders());
   }
 
   getHomeData() {
@@ -105,11 +120,4 @@ export class Crystal {
     });
   }
 
-
-  transfer( payload: TransferPayload) {
-    return this.http.post(
-      `${this.base}/me/transfer`,
-      payload,
-    );
-  }
 }

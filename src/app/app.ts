@@ -1,8 +1,7 @@
 import { Component, OnInit  } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {HeaderComponent} from './shared/header.component/header.component';
-import {TelegramService} from './telegram.service';
-import {Crystal} from './api/crystal';
+import {TelegramWebappService} from '@zakarliuka/ng-telegram-webapp';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +11,12 @@ import {Crystal} from './api/crystal';
   styleUrl: './app.css'
 })
 export class App implements OnInit{
-  constructor(private crystal: Crystal,private tg: TelegramService) {}
+  constructor(private telegram: TelegramWebappService) {}
 
   ngOnInit() {
+    this.telegram.ready();
+    this.telegram.expand();
+
     console.log('ngOnInit сработал');
-
   }
-
-
 }

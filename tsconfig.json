@@ -22,7 +22,9 @@
     "typeCheckHostBindings": true,
     "strictTemplates": true
   },
-  "files": [],
+  "files": [
+    "src/typings.d.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.app.json"

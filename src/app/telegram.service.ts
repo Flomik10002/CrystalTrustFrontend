@@ -1,7 +1,10 @@
-// telegram.service.ts
 import { Injectable } from '@angular/core';
 
-declare global { interface Window { Telegram: any } }
+declare global {
+  interface Window {
+    Telegram: any;
+  }
+}
 
 @Injectable({ providedIn: 'root' })
 export class TelegramService {
@@ -10,20 +13,47 @@ export class TelegramService {
 
   constructor() {
     const tg = window.Telegram?.WebApp;
-    if (tg) {
-      this._initData = tg.initData ?? '';          // Сырая строка
-      this._initDataObj = Object.fromEntries(
-        new URLSearchParams(this._initData)
-      );
+
+    if (tg && tg.initData) {
+      this._initData = tg.initData;
     } else {
-      console.warn('⚠️ Telegram WebApp object not found.');
+      console.warn('Telegram.WebApp.initData не найден. Пробуем достать из location.hash');
+
+      const hash = decodeURIComponent(window.location.hash);
+      const match = hash.match(/tgWebAppData=(.+?)(?:&|$)/);
+      if (match) {
+        this._initData = match[1];
+      }
+    }
+
+    if (this._initData) {
+      try {
+        this._initDataObj = Object.fromEntries(new URLSearchParams(this._initData));
+      } catch (e) {
+        console.error('Не удалось распарсить initData', e);
+      }
     }
   }
 
-  /** Точно та строка, что уйдёт в заголовок */
-  get initDataRaw() { return this._initData; }
+  get initData(): string {
+    return this._initData;
+  }
 
-  /** Уже распарсенный JS‑объект (удобно для логов) */
-  get initDataObj() { return this._initDataObj; }
+  get initDataRaw() {
+    return this._initData;
+  }
+
+  get initDataObj() {
+    return this._initDataObj;
+  }
+
+  get userId(): string | undefined {
+    const user = this._initDataObj['user'];
+    if (!user) return undefined;
+    try {
+      return JSON.parse(user)?.id?.toString();
+    } catch {
+      return undefined;
+    }
+  }
 }
-
