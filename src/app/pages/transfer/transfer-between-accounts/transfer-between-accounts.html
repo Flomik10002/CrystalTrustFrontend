@@ -1,5 +1,6 @@
 <!-- transfer.component.html -->
-<div class="min-h-screen bg-background text-text">
+<div class="min-h-screen bg-background text-text"
+     (pointerdown)="onBackdropPointer($event)">
   <app-header></app-header>
   <div class="h-[60px]"></div>
 

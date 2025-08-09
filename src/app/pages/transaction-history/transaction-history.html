@@ -25,6 +25,7 @@
           type="text"
           placeholder="Поиск"
           [ngModel]="searchQuery()"
+          (keydown.enter)="blurAmount()"
         (ngModelChange)="searchQuery.set($event)"
         class="w-full bg-transparent text-white text-lg placeholder-[#848484] border-none outline-none" />
       </div>

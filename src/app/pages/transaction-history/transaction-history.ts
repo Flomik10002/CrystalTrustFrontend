@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import {Component, computed, ElementRef, inject, OnInit, signal, ViewChild} from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { NgClass, NgForOf, NgIf } from "@angular/common";
 import { RouterLink } from '@angular/router';
@@ -34,6 +34,8 @@ export interface TxItem {
 })
 
 export class TransactionHistory implements OnInit {
+  @ViewChild('amountInput', { static: true }) amountRef!: ElementRef<HTMLInputElement>;
+
   private api = inject(Crystal);
 
   private txData = signal<TransactionDay[]>([]);
@@ -74,6 +76,18 @@ export class TransactionHistory implements OnInit {
     return (tx.amount > 0 ? fromNorm : toNorm) || 'CrystalBank';
   }
 
+  blurAmount(): void {
+    this.amountRef?.nativeElement.blur();
+  }
+
+  onContainerPointerDown(ev: Event): void {
+    const t = ev.target as HTMLElement | null;
+    if (!t) return;
+    const el = this.amountRef?.nativeElement;
+    if (!el) return;
+    if (t === el || t.closest('input') === el) return;
+    this.blurAmount();
+  }
 
   private fetchTxData(): void {
     this.loading.set(true);

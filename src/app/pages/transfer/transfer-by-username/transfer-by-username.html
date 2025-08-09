@@ -1,5 +1,6 @@
 <!-- transfer.component.html -->
-<div class="min-h-screen bg-background text-text">
+<div class="min-h-screen bg-background text-text"
+     (pointerdown)="onBackdropPointer($event)">
   <app-header></app-header>
   <div class="h-[60px]"></div>
 
@@ -23,6 +24,7 @@
         [(ngModel)]="nickname"
         type="text"
         placeholder="Введите никнейм"
+        (keydown.enter)="blurActive()"
         class="w-full bg-transparent text-white text-lg placeholder-text-second border-none outline-none"
       />
     </div>
@@ -37,6 +39,7 @@
     <div class="bg-background-level2 rounded-2xl p-4 relative">
       <textarea [(ngModel)]="message" maxlength="40"
                 placeholder="Сообщение получателю"
+                (keydown.enter)="blurActive()"
                 class="w-full bg-transparent text-white text-lg placeholder-text-second border-none outline-none resize-none h-16"></textarea>
       <div class="absolute bottom-4 right-4 text-text-second text-sm">
         {{ message.length }}/40
