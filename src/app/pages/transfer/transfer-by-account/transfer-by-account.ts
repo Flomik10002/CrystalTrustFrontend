@@ -83,6 +83,22 @@ export class TransferByAccount implements OnInit, OnDestroy {
 
   clearError(): void { this.error.set(''); }
 
+  blurActive(): void {
+    const el = document.activeElement as HTMLElement | null;
+    if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || (el as any).isContentEditable)) {
+      el.blur();
+    }
+  }
+
+  onBackdropPointer(e: Event): void {
+    const t = e.target as HTMLElement | null;
+    if (!t) return;
+    // Если тапнули по input/textarea/contenteditable — ничего не делаем
+    if (t.closest('input, textarea, [contenteditable="true"]')) return;
+    // Иначе закрываем клавиатуру
+    this.blurActive();
+  }
+
   async submitTransfer(): Promise<void> {
     if (!this.canSubmit()) return;
     this.pending.set(true);

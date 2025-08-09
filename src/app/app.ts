@@ -16,7 +16,5 @@ export class App implements OnInit{
   ngOnInit() {
     this.telegram.ready();
     this.telegram.expand();
-
-    console.log('ngOnInit сработал');
   }
 }

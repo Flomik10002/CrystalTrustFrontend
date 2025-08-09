@@ -11,7 +11,16 @@
       </div>
     </div>
 
-    <div class="flex gap-3 pb-space-20 pt-space-10 pl-space-20 pr-space-20 overflow-x-auto">
+    <div
+      #stories
+      class="flex gap-3 pb-space-20 pt-space-10 pl-space-20 pr-space-20 overflow-x-auto cursor-grab select-none"
+      (pointerdown)="onStoriesDown($event)"
+      (pointermove)="onStoriesMove($event)"
+      (pointerup)="onStoriesUp($event)"
+      (pointercancel)="onStoriesUp($event)"
+      (pointerleave)="onStoriesUp($event)"
+      style="touch-action: auto; -webkit-overflow-scrolling: touch;"
+    >
       <app-story-card color="bg-purple-500"></app-story-card>
       <app-story-card color="bg-slate-600"></app-story-card>
       <app-story-card color="bg-amber-200"></app-story-card>

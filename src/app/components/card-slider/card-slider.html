@@ -1,5 +1,16 @@
-  <div class="overflow-x-auto scroll-smooth snap-x snap-mandatory mx-6 mb-4" (scroll)="onScroll($event)">
-    <div class="flex gap-4 w-fit">
+<div
+  #slider
+  class="overflow-x-auto scroll-smooth snap-x snap-mandatory mx-6 mb-4 cursor-grab select-none"
+  (scroll)="onScroll($event)"
+  (wheel)="onWheel($event)"
+  (pointerdown)="onDragStart($event)"
+  (pointermove)="onDragMove($event)"
+  (pointerup)="onDragEnd($event)"
+  (pointercancel)="onDragEnd($event)"
+  (pointerleave)="onDragEnd($event)"
+  style="touch-action: auto; -webkit-overflow-scrolling: touch;"
+>
+  <div class="flex gap-4 w-fit">
       <div
         *ngFor="let card of cards; index as i"
         class="snap-center shrink-0 w-[calc(100vw-48px)] border-none rounded-[25px] p-6"

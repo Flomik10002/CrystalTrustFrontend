@@ -25,11 +25,10 @@
           type="text"
           placeholder="Поиск"
           [ngModel]="searchQuery()"
+          (keydown.enter)="blurAmount()"
         (ngModelChange)="searchQuery.set($event)"
         class="w-full bg-transparent text-white text-lg placeholder-[#848484] border-none outline-none" />
       </div>
-
-      <div *ngIf="loading()" class="text-center text-white mt-10">Загрузка…</div>
 
       <div *ngIf="!loading() && filteredTransactions().length === 0"
            class="flex-1 flex flex-col items-center justify-center text-[#848484]">
@@ -38,7 +37,7 @@
           <path d="M9 9L15 15" stroke="#848484" stroke-width="2" stroke-linecap="round"/>
           <rect x="3" y="3" width="18" height="18" rx="9" stroke="#848484" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <p class="text-center">Ничего не&nbsp;найдено</p>
+        <p class="text-center">Ничего не найдено</p>
       </div>
 
       <ng-container *ngFor="let day of filteredTransactions()">
@@ -55,7 +54,7 @@
                  alt="avatar" />
             <div>
               <div class="text-white text-lg font-sb">
-                {{ tx.amount > 0 ? tx.from : tx.to }}
+                {{ displayName(tx) }}
               </div>
               <div class="text-[#848484] text-sm">{{ tx.type }}</div>
             </div>
