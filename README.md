@@ -1,38 +1,39 @@
-# CrystalTrust Backend
+# CrystalTrust Frontend
 
-CrystalTrust Backend is the **core API** powering the Crystal Bank virtual financial system.  
-It handles account management, transactions, authentication, and integrations with external services like Telegram bots.
+CrystalTrust Frontend is the **web dashboard** for the Crystal Bank virtual financial system.  
+It provides players with an intuitive and responsive interface to manage accounts, review transactions, and perform secure operations via the browser or Telegram WebApp.
 
 ## Features
 
-- **Account Management**  
-  Create and manage user and business accounts linked to Minecraft nicknames.
+- **Account Overview**  
+  View balances, linked Minecraft accounts, and recent transactions.
 
-- **Transactions**  
-  Deposit, withdraw, and transfer funds between accounts with full validation and transaction history.
+- **Transfers & Payments**  
+  Perform deposits, withdrawals, and transfers between accounts.
 
-- **Security**  
-  JWT-based authentication, transaction status verification, and role-based permissions.
+- **Transaction History**  
+  Filter and search past transactions by date, type, and amount.
 
-- **Telegram Bot Integration**  
-  API endpoints used by the Crystal Bank Telegram bot for secure financial operations.
+- **Responsive Design**  
+  Built with Tailwind CSS to ensure smooth experience on desktop and mobile.
 
-- **Real-time Updates**  
-  Server-Sent Events (SSE) for instant balance and transaction status updates.
+- **Telegram WebApp Support**  
+  Fully functional inside Telegram as a WebApp for quick access.
 
 ## Technology Stack
 
-- **Framework:** FastAPI (Python)
-- **Database:** PostgreSQL
-- **Messaging:** aiogram (Telegram Bot API)
+- **Framework:** Angular
+- **Styling:** Tailwind CSS
+- **Integration:** Telegram WebApp API
 - **Real-time:** Server-Sent Events (SSE)
-- **Authentication:** JWT
 
 ## Planned Features
 
-- API rate-limiting and IP-based security rules
+- Dark/light theme switcher
+- Transaction analytics and charts
+- Customizable account dashboard
 
 ---
 
 ### 📌 Project Goal
-To provide a secure, scalable, and extensible backend for the Crystal Bank project, ensuring realistic and reliable financial operations inside Minecraft.
+To deliver a user-friendly and secure interface for the Crystal Bank system, seamlessly connecting Minecraft gameplay with real-world inspired financial management tools.
