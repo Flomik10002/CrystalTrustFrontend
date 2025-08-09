@@ -53,7 +53,7 @@
                  alt="avatar" />
             <div>
               <div class="text-white text-lg font-sb">
-                {{ tx.amount > 0 ? tx.from : tx.to }}
+                {{ displayName(tx) }}
               </div>
               <div class="text-[#848484] text-sm">{{ tx.type }}</div>
             </div>
