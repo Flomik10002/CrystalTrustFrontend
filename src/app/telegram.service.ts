@@ -17,7 +17,6 @@ export class TelegramService {
     if (tg && tg.initData) {
       this._initData = tg.initData;
     } else {
-      console.warn('Telegram.WebApp.initData не найден. Пробуем достать из location.hash');
 
       const hash = decodeURIComponent(window.location.hash);
       const match = hash.match(/tgWebAppData=(.+?)(?:&|$)/);
@@ -30,7 +29,7 @@ export class TelegramService {
       try {
         this._initDataObj = Object.fromEntries(new URLSearchParams(this._initData));
       } catch (e) {
-        console.error('Не удалось распарсить initData', e);
+        console.error('Unable to parse initData', e);
       }
     }
   }

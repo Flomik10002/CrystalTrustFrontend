@@ -39,6 +39,11 @@ testem.log
 /typings
 src/environment.prod.ts
 /certs/
+.env
+dist/
+node_modules/
+*.pem
+*.key
 
 # System files
 .DS_Store
