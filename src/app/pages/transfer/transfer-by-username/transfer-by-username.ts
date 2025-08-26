@@ -112,9 +112,7 @@ export class TransferByUsername implements OnInit, OnDestroy {
   onBackdropPointer(e: Event): void {
     const t = e.target as HTMLElement | null;
     if (!t) return;
-    // Если тапнули по input/textarea/contenteditable — ничего не делаем
     if (t.closest('input, textarea, [contenteditable="true"]')) return;
-    // Иначе закрываем клавиатуру
     this.blurActive();
   }
 
