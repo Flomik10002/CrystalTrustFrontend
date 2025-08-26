@@ -5,14 +5,10 @@
     <div class="bg-background-level1 rounded-b-40">
       <div class="flex items-center pt-space-30 pb-space-20 px-4">
         <div class="h-10 w-10 border-2 border-primary rounded-full overflow-hidden">
-          <img
-            src="https://mc-heads.net/avatar/_Flomik_"
-            alt="avatar"
-            class="w-full h-full object-cover"
-          />
+          <img [src]="avatarUrl" alt="avatar" class="w-full h-full object-cover" />
         </div>
         <div class="ml-2">
-          <h2 class="text-b font-bold">_Flomik_</h2>
+          <h2 class="text-b font-bold">{{ nickname }}</h2>
         </div>
       </div>
 
@@ -32,11 +28,6 @@
   <div class="bg-background-level1 rounded-t-40">
     <div class="mb-6">
       <div class="relative mb-6">
-        <img
-          src="assets/payments/pending-banner.png"
-          alt="CrystalPay"
-          class="w-full h-auto rounded-2xl"
-        />
       </div>
     </div>
 
